@@ -22,39 +22,47 @@ async function uploadFile() {
 
     reader.onload = async function (e) {
         const contentBase64 = btoa(e.target.result);
-
         const filePath = `uploads/${file.name}`;
         const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${filePath}`;
 
-        // Проверяем, существует ли файл
-        let sha = null;
-        const checkResponse = await fetch(url, {
-            headers: { Authorization: `token ${TOKEN}` }
-        });
+        try {
+            
+            let sha = null;
+            const checkResponse = await fetch(url, {
+                headers: { Authorization: `Bearer ${TOKEN}`, Accept: "application/vnd.github.v3+json" }
+            });
 
-        if (checkResponse.ok) {
-            const fileData = await checkResponse.json();
-            sha = fileData.sha;
-        }
+            if (checkResponse.ok) {
+                const fileData = await checkResponse.json();
+                sha = fileData.sha;
+            }
 
-        // Загружаем файл в репозиторий
-        const response = await fetch(url, {
-            method: "PUT",
-            headers: {
-                Authorization: `token ${TOKEN}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                message: `Upload ${file.name}`,
-                content: contentBase64,
-                sha: sha
-            })
-        });
+            
+            const response = await fetch(url, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${TOKEN}`,
+                    Accept: "application/vnd.github.v3+json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: `Upload ${file.name}`,
+                    content: contentBase64,
+                    sha: sha
+                })
+            });
 
-        if (response.ok) {
-            status.innerHTML = `✅ Uploaded! <br> <a href="https://${GITHUB_USERNAME}.github.io/${REPO_NAME}/uploads/${file.name}" target="_blank">View File</a>`;
-        } else {
-            status.innerHTML = "❌ Upload failed!";
+            const result = await response.json();
+            console.log("GitHub API Response:", result);
+
+            if (response.ok) {
+                status.innerHTML = `✅ Uploaded! <br> <a href="https://${GITHUB_USERNAME}.github.io/${REPO_NAME}/uploads/${file.name}" target="_blank">View File</a>`;
+            } else {
+                status.innerHTML = `❌ Upload failed: ${result.message}`;
+            }
+        } catch (error) {
+            console.error("Upload Error:", error);
+            status.innerHTML = "❌ Upload failed! Check console.";
         }
     };
 
