@@ -1,64 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
 body {
-    background-color: #0d0d0d;
-    color: #00ffcc;
-    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
     text-align: center;
-    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
 .container {
-    margin-top: 50px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+    width: 80%;
+    max-width: 400px;
 }
 
 h1 {
-    font-size: 2.5em;
-    text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-}
-
-.support {
-    font-size: 1.2em;
-}
-
-a {
-    color: #ff00ff;
-    text-decoration: none;
-    font-weight: bold;
+    color: cyan;
+    text-shadow: 0 0 10px cyan;
+    font-size: 24px;
 }
 
 .file-label {
-    display: block;
-    margin: 20px auto;
-    padding: 15px;
-    border: 2px solid #00ffcc;
-    background: #1a1a1a;
+    display: inline-block;
+    background: linear-gradient(45deg, cyan, blue);
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
-    width: 250px;
-    text-align: center;
-    font-size: 1.2em;
-    text-shadow: 0 0 5px #00ffcc;
+    transition: 0.3s;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px cyan;
 }
 
-input[type="file"] {
+.file-label:hover {
+    background: linear-gradient(45deg, blue, cyan);
+    box-shadow: 0 0 20px cyan;
+}
+
+.file-input {
     display: none;
 }
 
+#fileName {
+    margin-top: 10px;
+    font-size: 14px;
+    color: cyan;
+}
+
 button {
-    background: #00ffcc;
-    color: #0d0d0d;
+    background: linear-gradient(45deg, magenta, purple);
+    color: #fff;
     border: none;
-    padding: 15px 30px;
-    font-size: 1.2em;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    text-shadow: 0 0 5px #0d0d0d;
     transition: 0.3s;
+    margin-top: 15px;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px magenta;
 }
 
 button:hover {
-    background: #ff00ff;
+    background: linear-gradient(45deg, purple, magenta);
+    box-shadow: 0 0 20px magenta;
 }
 
 #status {
-    margin-top: 20px;
-    font-size: 1.2em;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ff0;
+    text-shadow: 0 0 10px #ff0;
 }
