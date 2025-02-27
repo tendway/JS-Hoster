@@ -13,30 +13,31 @@ body {
 }
 
 .container {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.9);
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.7);
     width: 80%;
     max-width: 400px;
 }
 
-h1 {
+.neon-text {
     color: cyan;
-    text-shadow: 0 0 10px cyan;
-    font-size: 24px;
+    text-shadow: 0 0 15px cyan;
+    font-size: 26px;
+    font-weight: bold;
 }
 
 .file-label {
     display: inline-block;
     background: linear-gradient(45deg, cyan, blue);
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 12px 25px;
+    border-radius: 8px;
     cursor: pointer;
     transition: 0.3s;
     font-weight: bold;
     text-transform: uppercase;
-    box-shadow: 0 0 10px cyan;
+    box-shadow: 0 0 12px cyan;
 }
 
 .file-label:hover {
@@ -49,27 +50,27 @@ h1 {
 }
 
 #fileName {
-    margin-top: 10px;
+    margin-top: 12px;
     font-size: 14px;
     color: cyan;
 }
 
-button {
+.upload-btn {
     background: linear-gradient(45deg, magenta, purple);
     color: #fff;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 12px 25px;
+    border-radius: 8px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
-    margin-top: 15px;
+    margin-top: 20px;
     text-transform: uppercase;
-    box-shadow: 0 0 10px magenta;
+    box-shadow: 0 0 12px magenta;
 }
 
-button:hover {
+.upload-btn:hover {
     background: linear-gradient(45deg, purple, magenta);
     box-shadow: 0 0 20px magenta;
 }
