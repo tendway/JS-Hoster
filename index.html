@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Hoster</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Uploader Host</h1>
+        <p class="support"><b>Support:</b> <a href="https://t.me/SupportTendway" target="_blank">@SupportTendway</a></p>
+        
+        <label class="file-label">
+            Select a File (HTML, CSS, JS)
+            <input type="file" id="fileInput" accept=".html,.css,.js">
+        </label>
+        
+        <button onclick="uploadFile()">UPLOAD</button>
+        <p id="status"></p>
+    </div>
+    
+    <script src="upload.js"></script>
+</body>
+</html>
