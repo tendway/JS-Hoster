@@ -1,6 +1,6 @@
 const GITHUB_USERNAME = "tendway";
 const REPO_NAME = "JS-Hoster";
-const TOKEN = "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"; 
+const TOKEN = "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"; 
 
 function updateFileName() {
     const fileInput = document.getElementById("fileInput");
