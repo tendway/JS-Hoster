@@ -1,0 +1,26 @@
+name: Upload File to Repo
+
+on:
+  repository_dispatch:
+    types: [upload-file]
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Decode file content
+        run: |
+          echo "${{ github.event.client_payload.content }}" | base64 --decode > "uploads/${{ github.event.client_payload.filename }}"
+
+      - name: Commit & Push file
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add "uploads/${{ github.event.client_payload.filename }}"
+          git commit -m "Uploaded ${{ github.event.client_payload.filename }}"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
