@@ -1,6 +1,12 @@
 const GITHUB_USERNAME = "tendway";
 const REPO_NAME = "JS-Hoster";
 
+function updateFileName() {
+    const fileInput = document.getElementById("fileInput");
+    const fileName = document.getElementById("fileName");
+    fileName.innerText = fileInput.files.length ? fileInput.files[0].name : "No file selected";
+}
+
 async function uploadFile() {
     const fileInput = document.getElementById("fileInput");
     const status = document.getElementById("status");
@@ -15,9 +21,9 @@ async function uploadFile() {
 
     reader.onload = async function (e) {
         const contentBase64 = btoa(unescape(encodeURIComponent(e.target.result)));
-        
+
         const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/dispatches`;
-        
+
         const response = await fetch(url, {
             method: "POST",
             headers: {
