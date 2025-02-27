@@ -1,5 +1,6 @@
 const GITHUB_USERNAME = "tendway";
 const REPO_NAME = "JS-Hoster";
+const TOKEN = "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"; 
 
 function updateFileName() {
     const fileInput = document.getElementById("fileInput");
@@ -20,22 +21,33 @@ async function uploadFile() {
     const reader = new FileReader();
 
     reader.onload = async function (e) {
-        const contentBase64 = btoa(unescape(encodeURIComponent(e.target.result)));
+        const contentBase64 = btoa(e.target.result);
 
-        const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/dispatches`;
+        const filePath = `uploads/${file.name}`;
+        const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${filePath}`;
 
+        // Проверяем, существует ли файл
+        let sha = null;
+        const checkResponse = await fetch(url, {
+            headers: { Authorization: `token ${TOKEN}` }
+        });
+
+        if (checkResponse.ok) {
+            const fileData = await checkResponse.json();
+            sha = fileData.sha;
+        }
+
+        // Загружаем файл в репозиторий
         const response = await fetch(url, {
-            method: "POST",
+            method: "PUT",
             headers: {
-                "Accept": "application/vnd.github.v3+json",
+                Authorization: `token ${TOKEN}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                event_type: "upload-file",
-                client_payload: {
-                    filename: file.name,
-                    content: contentBase64
-                }
+                message: `Upload ${file.name}`,
+                content: contentBase64,
+                sha: sha
             })
         });
 
@@ -46,5 +58,5 @@ async function uploadFile() {
         }
     };
 
-    reader.readAsText(file);
+    reader.readAsBinaryString(file);
 }
